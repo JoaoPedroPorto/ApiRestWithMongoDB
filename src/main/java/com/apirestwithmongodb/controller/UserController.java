@@ -1,17 +1,11 @@
 package com.apirestwithmongodb.controller;
 
 import com.apirestwithmongodb.model.Users;
-import com.apirestwithmongodb.response.Response;
 import com.apirestwithmongodb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
