@@ -6,8 +6,10 @@ import com.apirestwithmongodb.model.Users;
 import com.apirestwithmongodb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
+
+import java.util.List;
+/*import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;*/
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -15,10 +17,15 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDAO userDAO;
 
-    @Override
+    /*@Override
     public Flux<Users> listAllUsers() { return userDAO.findAll(); }
 
     @Override
-    public Mono<Users> createUser(Users user) { return userDAO.save(user); }
+    public Mono<Users> createUser(Users user) { return userDAO.save(user); }*/
+
+    @Override
+    public List<Users> listAllUsers() {
+        return userDAO.findAll();
+    }
 
 }
