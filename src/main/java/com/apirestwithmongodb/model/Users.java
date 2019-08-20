@@ -1,5 +1,6 @@
 package com.apirestwithmongodb.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -7,17 +8,18 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Users {
 
     @Id
-    private String _id;
+    private String id;
     private String name;
     private String mail;
+    @JsonIgnore
     private String password;
     private String status;
 
     // GETTERS AND SETTERS
 
-    public String getId() { return _id; }
+    public String getId() { return id; }
 
-    public void setId(String _id) { this._id = _id; }
+    public void setId(String id) { this.id = id; }
 
     public String getName() {
         return name;
@@ -55,7 +57,7 @@ public class Users {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((_id == null) ? 0 : _id.hashCode());
+        result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
     @Override
@@ -67,10 +69,10 @@ public class Users {
         if (getClass() != obj.getClass())
             return false;
         Users other = (Users) obj;
-        if (_id == null) {
-            if (other._id != null)
+        if (id == null) {
+            if (other.id != null)
                 return false;
-        } else if (!_id.equals(other._id))
+        } else if (!id.equals(other.id))
             return false;
         return true;
     }
