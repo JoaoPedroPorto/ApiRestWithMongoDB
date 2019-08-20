@@ -3,8 +3,6 @@ package com.apirestwithmongodb.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Objects;
-
 @Document
 public class Users {
 
@@ -19,7 +17,7 @@ public class Users {
 
     public String getId() { return _id; }
 
-    public void setId(String id) { this._id = id; }
+    public void setId(String _id) { this._id = _id; }
 
     public String getName() {
         return name;
