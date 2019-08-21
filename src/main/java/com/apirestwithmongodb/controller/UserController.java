@@ -7,6 +7,8 @@ import com.apirestwithmongodb.exception.PreConditionFailedException;
 import com.apirestwithmongodb.model.Users;
 import com.apirestwithmongodb.response.Response;
 import com.apirestwithmongodb.service.UserService;
+import io.swagger.annotations.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,12 +19,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping(ApiMapping.USER)
+@Slf4j
 public class UserController {
 
     @Autowired
     UserService userService;
 
-    @GetMapping(value = "")
+    @GetMapping
+    @ApiOperation(value = "Lista todos os usuários ativos do sistema.")
     public ResponseEntity<Response<List<Users>>> listAllUsers() {
         Response<List<Users>> res = new Response<List<Users>>();
         res.setData(userService.listAllUsers());
@@ -30,7 +34,17 @@ public class UserController {
         return ResponseEntity.ok(res);
     }
 
-    @PostMapping(value = "")
+
+    @PostMapping
+    @ApiOperation(value = "Cria um nosso usuário no sistema.")
+    /*@ApiImplicitParams(
+            {
+                    @ApiImplicitParam(name = "name", dataType = "String", required = true),
+                    @ApiImplicitParam(
+                            name = "mail", dataType = "String", required = true
+                    )
+            }
+    )*/
     public ResponseEntity<Object> createUser(@RequestBody Users user)
             throws ApplicationException, PreConditionFailedException {
         userService.createUser(user);
@@ -40,6 +54,7 @@ public class UserController {
     }
 
     @PatchMapping(value = "/{id}")
+    @ApiOperation(value = "Atualiza um usuário do sistema.")
     public ResponseEntity<Object> updateUser(@PathVariable("id") String id, @RequestBody Users user)
             throws ApplicationException, PreConditionFailedException {
         userService.updateUser(id, user);
@@ -49,11 +64,15 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/{id}")
+    @ApiOperation(value = "Exclui um usuário do sistema.")
     public ResponseEntity<Object> deleteUser(@PathVariable("id") String id)
             throws ApplicationException, PreConditionFailedException {
         userService.deleteUser(id);
         HashMap<String, String> res = new HashMap<>();
         res.put("message", MessageEnum.DELETE_USER_SUCCESS.getMessage());
+
+        Users a = Users.builder().id("1").build();
+
         return new ResponseEntity<Object>(res, HttpStatus.OK);
     }
 
