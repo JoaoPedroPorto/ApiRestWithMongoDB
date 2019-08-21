@@ -8,7 +8,7 @@ import java.util.stream.Stream;
 
 public interface UserDAO extends MongoRepository<Users, String> {
 
-    Stream<Users> findAllByStatusNot(String status);
+    Stream<Users> findAllByStatusNotOrderByNameAsc(String status);
 
     Optional<Users> findOneByMail(String mail);
 

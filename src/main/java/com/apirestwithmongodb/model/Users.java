@@ -4,11 +4,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Document
 public class Users {
 
     @Id
     private String id;
+    private Date createdDate;
+    private Date editedDate;
     private String name;
     private String mail;
     @JsonIgnore
@@ -20,6 +24,14 @@ public class Users {
     public String getId() { return id; }
 
     public void setId(String id) { this.id = id; }
+
+    public Date getCreatedDate() { return createdDate; }
+
+    public void setCreatedDate(Date createdDate) { this.createdDate = createdDate; }
+
+    public Date getEditedDate() { return editedDate; }
+
+    public void setEditedDate(Date editedDate) { this.editedDate = editedDate; }
 
     public String getName() {
         return name;

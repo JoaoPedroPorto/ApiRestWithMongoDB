@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -27,7 +28,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<Users> listAllUsers() {
         return userDAO
-                .findAllByStatusNot(StatusEnum.INACTIVE.getStatus())
+                .findAllByStatusNotOrderByNameAsc(StatusEnum.INACTIVE.getStatus())
                 .collect(Collectors.toList());
     }
 
@@ -44,6 +45,7 @@ public class UserServiceImpl implements UserService {
             userDB.get().setName(user.getName().trim());
             userDB.get().setPassword(ApplicationUtil.generatePassword());
             userDB.get().setStatus(StatusEnum.PENDING.getStatus());
+            userDB.get().setEditedDate(new Date());
             Users usersaved = userDAO.save(userDB.get());
             if (usersaved == null) throw new ApplicationException(MessageEnum.CREATE_USER_ERROR.getMessage());
             return;
@@ -53,6 +55,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(ApplicationUtil.generatePassword());
         user.setName(user.getName().trim());
         user.setMail(user.getMail().trim());
+        user.setCreatedDate(new Date());
         Users usersaved = userDAO.save(user);
         if (usersaved == null) throw new ApplicationException(MessageEnum.CREATE_USER_ERROR.getMessage());
     }
@@ -67,6 +70,7 @@ public class UserServiceImpl implements UserService {
         if (userDB == null || !userDB.isPresent())
             throw new ApplicationException(MessageEnum.USER_NOT_FOUND.getMessage());
         userDB.get().setName(user.getName().trim());
+        userDB.get().setEditedDate(new Date());
         Users userSaved = userDAO.save(userDB.get());
         if (userSaved == null) throw new ApplicationException(MessageEnum.UPDATE_USER_ERROR.getMessage());
     }
@@ -80,6 +84,7 @@ public class UserServiceImpl implements UserService {
         if (userDB == null || !userDB.isPresent())
             throw new ApplicationException(MessageEnum.USER_NOT_FOUND.getMessage());
         userDB.get().setStatus(StatusEnum.INACTIVE.getStatus());
+        userDB.get().setEditedDate(new Date());
         Users userSaved = userDAO.save(userDB.get());
         if (userSaved == null) throw new ApplicationException(MessageEnum.DELETE_USER_ERROR.getMessage());
     }

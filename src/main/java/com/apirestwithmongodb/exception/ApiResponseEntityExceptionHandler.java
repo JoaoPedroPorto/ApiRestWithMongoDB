@@ -50,7 +50,7 @@ public class ApiResponseEntityExceptionHandler extends ResponseEntityExceptionHa
     public final ResponseEntity<Object> handlePreConditionFailedErrorException(WebRequest req) {
         HashMap<String, String> res = new HashMap<>();
         res.put("error", MessageEnum.PARAMETER_EMPTY_OR_NULL.getMessage());
-        return new ResponseEntity<Object>(res, new HttpHeaders(), HttpStatus.FORBIDDEN);
+        return new ResponseEntity<Object>(res, new HttpHeaders(), HttpStatus.PRECONDITION_FAILED);
     }
 
 }
