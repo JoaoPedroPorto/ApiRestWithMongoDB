@@ -4,12 +4,15 @@ public enum MessageEnum {
 
     // GENERAL MESSAGES
 
+    UNAUTHORIZED("Você não se encontra logado no sistema ou sua sessão expirou..."),
+    FORBIDDEN("Sem acesso a esse recurso..."),
+    METHOD_FAILURE("A requisição falhou..."),
     PARAMETER_EMPTY_OR_NULL("Existem parâmetros inconsistentes..."),
     INTERNAL_SERVER_ERROR("Erro interno do servidor..."),
 
     // USER
 
-    USER_NOT_FOUND("Usuário não existe ou se encontra sem acesso"),
+    USER_NOT_FOUND("Usuário não existe ou se encontra sem acesso..."),
     CREATE_USER_ERROR("Erro ao criar usuário..."),
     UPDATE_USER_ERROR("Erro ao atualizar usuário..."),
     DELETE_USER_ERROR("Erro ao excluir usuário..."),
