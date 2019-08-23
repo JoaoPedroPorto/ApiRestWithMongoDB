@@ -9,6 +9,7 @@ public enum MessageEnum {
     METHOD_FAILURE("A requisição falhou..."),
     PARAMETER_EMPTY_OR_NULL("Existem parâmetros inconsistentes..."),
     INTERNAL_SERVER_ERROR("Erro interno do servidor..."),
+    MAIL_INVALID("E-mail inválido..."),
 
     // USER
 

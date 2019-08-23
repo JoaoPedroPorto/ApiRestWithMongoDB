@@ -34,17 +34,8 @@ public class UserController {
         return ResponseEntity.ok(res);
     }
 
-
     @PostMapping
     @ApiOperation(value = "Cria um nosso usuário no sistema.")
-    /*@ApiImplicitParams(
-            {
-                    @ApiImplicitParam(name = "name", dataType = "String", required = true),
-                    @ApiImplicitParam(
-                            name = "mail", dataType = "String", required = true
-                    )
-            }
-    )*/
     public ResponseEntity<Object> createUser(@RequestBody Users user)
             throws ApplicationException, PreConditionFailedException {
         userService.createUser(user);
@@ -70,9 +61,7 @@ public class UserController {
         userService.deleteUser(id);
         HashMap<String, String> res = new HashMap<>();
         res.put("message", MessageEnum.DELETE_USER_SUCCESS.getMessage());
-
-        Users a = Users.builder().id("1").build();
-
+        // Users a = Users.builder().id("1").build();
         return new ResponseEntity<Object>(res, HttpStatus.OK);
     }
 

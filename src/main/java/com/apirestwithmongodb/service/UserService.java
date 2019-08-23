@@ -24,16 +24,19 @@ public class UserService {
     UserDAO userDAO;
 
     public List<Users> listAllUsers() {
+        log.info("Listagem de usuários");
         return userDAO
                 .findAllByStatusNotOrderByNameAsc(StatusEnum.INACTIVE.getStatus())
                 .collect(Collectors.toList());
     }
 
     public void createUser(Users user) throws ApplicationException, PreConditionFailedException {
-        log.info("Qualquer coisa");
+        log.info("Criação de usuário");
         if ((user.getName() == null || user.getName().trim().isEmpty()) ||
                 (user.getMail() == null || user.getMail().trim().isEmpty()))
             throw new PreConditionFailedException();
+        if (!ApplicationUtil.isMailValid(user.getMail().trim()))
+            throw new ApplicationException(MessageEnum.MAIL_INVALID.getMessage());
         Optional<Users> userDB = userDAO.findOneByMail(user.getMail().trim());
         if (userDB != null && userDB.isPresent() && !userDB.get().getStatus().equals(StatusEnum.INACTIVE))
             throw new ApplicationException(MessageEnum.EMAIL_EXIST_ERROR.getMessage());
@@ -58,6 +61,7 @@ public class UserService {
     }
 
     public void updateUser(String id, Users user) throws ApplicationException, PreConditionFailedException {
+        log.info("Atualização de usuário");
         if ((id == null || id.trim().isEmpty()) ||
                 (user.getName() == null || user.getName().trim().isEmpty()))
             throw new PreConditionFailedException();
@@ -72,6 +76,7 @@ public class UserService {
     }
 
     public void deleteUser(String id) throws ApplicationException, PreConditionFailedException {
+        log.info("Exclusão de um usuário");
         if (id == null || id.trim().isEmpty())
             throw new PreConditionFailedException();
         Optional<Users> userDB = userDAO

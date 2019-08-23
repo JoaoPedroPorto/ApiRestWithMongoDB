@@ -24,4 +24,9 @@ public class ApplicationUtil {
         return BCrypt.checkpw(password, encryptedPassword);
     }
 
+    public static boolean isMailValid(String mail) {
+         return
+                 mail.matches("^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$");
+    }
+
 }

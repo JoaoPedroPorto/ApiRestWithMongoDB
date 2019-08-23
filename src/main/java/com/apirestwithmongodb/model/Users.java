@@ -15,7 +15,7 @@ import java.util.Date;
 public class Users {
 
     @Id
-    @JsonIgnore
+    // @JsonIgnore
     private String id;
 
     @JsonIgnore
